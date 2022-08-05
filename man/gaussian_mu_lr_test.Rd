@@ -7,17 +7,19 @@
 \url{https://en.wikipedia.org/wiki/Likelihood-ratio_test}
 }
 \usage{
-gaussian_mu_lr_test(x, mu = 0, alternative = "two.sided")
+gaussian_mu_lr_test(x, mu, alternative = "two.sided", conf.level = 0.95)
 }
 \arguments{
-\item{x}{a (non-empty) numeric vector of data values.}
+\item{x}{a numeric vector of at least 50 data values.}
 
 \item{mu}{a number indicating the tested value of mu.}
 
 \item{alternative}{a character string specifying the alternative hypothesis, must be one of "two.sided" (default), "greater" or "less".}
+
+\item{conf.level}{confidence level of the likelihood interval.}
 }
 \value{
-An S3 class containing the test statistic, p value and alternative
+An S3 class containing the test statistic, p value, likelihood based confidence interval, and alternative
 hypothesis.
 }
 \description{
