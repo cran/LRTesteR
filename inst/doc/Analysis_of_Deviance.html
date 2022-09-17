@@ -12,7 +12,7 @@
 
 
 
-<title>Generalized_One_Way.knit</title>
+<title>Analysis of Deviance</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -330,6 +330,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 
+<h1 class="title toc-ignore">Analysis of Deviance</h1>
 
 
 
@@ -347,7 +348,7 @@ deviation are created. For this test, the null hypothesis is</p>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>fctr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">50</span>), <span class="fu">rep</span>(<span class="dv">2</span>, <span class="dv">50</span>), <span class="fu">rep</span>(<span class="dv">3</span>, <span class="dv">50</span>))</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>fctr <span class="ot">&lt;-</span> <span class="fu">factor</span>(fctr, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>))</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">gaussian_mu_one_way</span>(x, fctr, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Likelihood Statistic: 205.77&quot;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Log Likelihood Statistic: 205.77&quot;</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;p value: 0&quot;</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Confidence Level Of Set: 95%&quot;</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Individual Confidence Level: 98.3%&quot;</span></span>
@@ -367,7 +368,7 @@ hypothesis is</p>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>fctr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">50</span>), <span class="fu">rep</span>(<span class="dv">2</span>, <span class="dv">50</span>))</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>fctr <span class="ot">&lt;-</span> <span class="fu">factor</span>(fctr, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>))</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cauchy_scale_one_way</span>(x, fctr, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Likelihood Statistic: 18.2&quot;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Log Likelihood Statistic: 18.2&quot;</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;p value: 0&quot;</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Confidence Level Of Set: 95%&quot;</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Individual Confidence Level: 97.5%&quot;</span></span>
@@ -378,14 +379,14 @@ hypothesis is</p>
 <h1>Poisson Random Variables</h1>
 <p>Here 4 poisson random variables with different lambdas are created.
 The null hypothesis is</p>
-<p><span class="math display">\[ H_{0}: \lambda_1 = \lambda_2 =
-\lambda_3 = \lambda_4  \]</span></p>
+<p><span class="math display">\[ H_{0}: \lambda_0 = \lambda_1 =
+\lambda_2 = \lambda_3  \]</span></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rpois</span>(<span class="dv">50</span>, <span class="dv">1</span>), <span class="fu">rpois</span>(<span class="dv">50</span>, <span class="dv">2</span>), <span class="fu">rpois</span>(<span class="dv">50</span>, <span class="dv">3</span>), <span class="fu">rpois</span>(<span class="dv">50</span>, <span class="dv">4</span>))</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>fctr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">50</span>), <span class="fu">rep</span>(<span class="dv">2</span>, <span class="dv">50</span>), <span class="fu">rep</span>(<span class="dv">3</span>, <span class="dv">50</span>), <span class="fu">rep</span>(<span class="dv">4</span>, <span class="dv">50</span>))</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>fctr <span class="ot">&lt;-</span> <span class="fu">factor</span>(fctr, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>, <span class="st">&quot;4&quot;</span>))</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">poisson_lambda_one_way</span>(x, fctr, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Likelihood Statistic: 107.3&quot;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Log Likelihood Statistic: 107.3&quot;</span></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;p value: 0&quot;</span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Confidence Level Of Set: 95%&quot;</span></span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Individual Confidence Level: 98.8%&quot;</span></span>
@@ -403,7 +404,7 @@ parameter, it is assumed common across groups. Some tests are more
 robust against violations of this assumption than others.</p>
 <p>All functions apply the Bonferroni correction to the set of
 confidence intervals. To have accurate coverage rates, each group
-requires 50 data points.</p>
+requires 50 data points or more.</p>
 </div>
 
 

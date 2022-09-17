@@ -1,3 +1,8 @@
+# LRTesteR 1.0.1
+* Add log to print function.
+* Add 6 inverse gaussion tests.
+* Rename vignette
+
 # LRTesteR 1.0.0
 * Rename tests from _lr_test to _one_sample.
 * Add _one_way tests.
