@@ -14,6 +14,8 @@ for (alt in c("two.sided", "greater", "less")) {
 
   # Compare with t test
   test_02 <- stats::t.test(x, alternative = alt)
+
+
   test_that("Check contents", {
     expect_true(test$p.value > .05)
     expect_true(abs(test$p.value - test_02$p.value) < .01)

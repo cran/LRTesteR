@@ -14,20 +14,21 @@ status](https://www.r-pkg.org/badges/version/LRTesteR)](https://cran.r-project.o
 LRTesteR provides likelihood ratio tests and associated confidence
 intervals for many common distributions. All functions match popular
 tests in R. If you are familiar with t.test and binom.test, you already
-know how to use these functions. Estimated asymptotic type I and type II
-error rates can be found
+know how to use these functions. All tests and confidence intervals rely
+on the $\chi^2$ approximation even when exact sampling distributions are
+known.
+
+Estimated asymptotic type I and type II error rates can be found
 [here](https://github.com/gmcmacran/TypeOneTypeTwoSim).
 
 # Nonparametric Tests and Confidence Intervals
 
 - Empirical Likelihood
   - mean
+  - quantile
 
 # Parametric Tests and Confidence Intervals
 
-All parametric tests and confidence intervals rely on the
-![\chi^2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cchi%5E2 "\chi^2")
-approximation even when exact sampling distributions are known.
 Parametric tests require a sample size of at least 50.
 
 - Beta
@@ -132,7 +133,7 @@ gamma_shape_one_way(x = x, fctr = fctr, conf.level = .95)
 
 # Example 4: Empirical Likelihood
 
-The empirical likelihood test does not require any distributional
+The empirical likelihood tests do not require any distributional
 assumptions and work with less data.
 
 ``` r
@@ -145,14 +146,14 @@ empirical_mu_one_sample(x = x, mu = 1, alternative = "two.sided")
 #> [1] "Confidence Interval: (0.752, 1.501)"
 ```
 
-# The ![\chi^2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cchi%5E2 "\chi^2") approximation
+# The $\chi^2$ approximation
 
-As implemented, all functions depend on the
-![\chi^2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cchi%5E2 "\chi^2")
-approximation. To get a sense of performance, lets compare the
-likelihood method to the exact method. Here, X is normally distributed
-with mu equal to 3 and standard deviation equal to 2. The two intervals
-are similar.
+As implemented, all functions depend on the $\chi^2$ approximation. To
+get a sense of accuracy of this approximation, lets compare the
+likelihood method to the exact method.
+
+X is normally distributed with mu equal to 3 and standard deviation
+equal to 2. The two intervals for $\mu$ are similar.
 
 ``` r
 set.seed(1)
@@ -165,12 +166,11 @@ likelihoodTest$conf.int
 #> [1] 2.735731 3.666063
 ```
 
-Lets compare tests for variance. Again, confidence intervals are
-similar.
+The confidence intervals for variance are similar as well.
 
 ``` r
 sigma2 <- 1.5^2 # Variance, not standard deviation.
-exactTest <- EnvStats::varTest(x = x, sigma.squared = sigma2,  alternative = "two.sided", conf.level = .95)
+exactTest <- EnvStats::varTest(x = x, sigma.squared = sigma2, alternative = "two.sided", conf.level = .95)
 likelihoodTest <- gaussian_variance_one_sample(x = x, sigma.squared = sigma2, alternative = "two.sided", conf.level = .95)
 as.numeric(exactTest$conf.int)
 #> [1] 1.929274 4.293414
@@ -178,12 +178,12 @@ likelihoodTest$conf.int
 #> [1] 1.875392 4.121238
 ```
 
-Changing to p for a binomial distribution, the confidence intervals are
-similar yet again.
+Changing to p for a binomial random variable, the confidence intervals
+are similar yet again.
 
 ``` r
-exactTest <- stats::binom.test(x = 10, n = 50,  p = .50, alternative = "two.sided", conf.level = .95)
-likelihoodTest <- binomial_p_one_sample(x = 10, n = 50,  p = .50, alternative = "two.sided", conf.level = .95)
+exactTest <- stats::binom.test(x = 10, n = 50, p = .50, alternative = "two.sided", conf.level = .95)
+likelihoodTest <- binomial_p_one_sample(x = 10, n = 50, p = .50, alternative = "two.sided", conf.level = .95)
 as.numeric(exactTest$conf.int)
 #> [1] 0.1003022 0.3371831
 likelihoodTest$conf.int
