@@ -355,77 +355,77 @@ and as a likelihood without parametric assumptions. (Owen 2001)</p>
 <h2>Tests For Mu</h2>
 <p>One sample and one-way tests are implemented. Note the distribution
 does not need to be symmetrical and less data is needed.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(LRTesteR)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(statmod)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rinvgauss</span>(<span class="at">n =</span> <span class="dv">30</span>, <span class="at">mean =</span> <span class="fl">2.25</span>, <span class="at">dispersion =</span> <span class="dv">2</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">empirical_mu_one_sample</span>(<span class="at">x =</span> x, <span class="at">mu =</span> <span class="dv">1</span>, <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Log Likelihood Statistic: 4.36&quot;</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;p value: 0.037&quot;</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Confidence Level: 95%&quot;</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Confidence Interval: (1.028, 2.486)&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(LRTesteR)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">library</span>(statmod)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rinvgauss</span>(<span class="at">n =</span> <span class="dv">30</span>, <span class="at">mean =</span> <span class="fl">2.25</span>, <span class="at">dispersion =</span> <span class="dv">2</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="fu">empirical_mu_one_sample</span>(<span class="at">x =</span> x, <span class="at">mu =</span> <span class="dv">1</span>, <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="co">#&gt; Log Likelihood Statistic: 4.36</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="co">#&gt; p value: 0.037</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="co">#&gt; Confidence Level: 95%</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="co">#&gt; Confidence Interval: (1.028, 2.486)</span></span></code></pre></div>
 <p>The one way test does not require nuisance parameters or sample size
 to be equal.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rinvgauss</span>(<span class="at">n =</span> <span class="dv">35</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">dispersion =</span> <span class="dv">1</span>),</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rinvgauss</span>(<span class="at">n =</span> <span class="dv">40</span>, <span class="at">mean =</span> <span class="dv">2</span>, <span class="at">dispersion =</span> <span class="dv">3</span>),</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rinvgauss</span>(<span class="at">n =</span> <span class="dv">45</span>, <span class="at">mean =</span> <span class="dv">3</span>, <span class="at">dispersion =</span> <span class="dv">5</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>fctr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">35</span>), <span class="fu">rep</span>(<span class="dv">2</span>, <span class="dv">40</span>), <span class="fu">rep</span>(<span class="dv">3</span>, <span class="dv">45</span>))</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>fctr <span class="ot">&lt;-</span> <span class="fu">factor</span>(fctr, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>))</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">empirical_mu_one_way</span>(<span class="at">x =</span> x, <span class="at">fctr =</span> fctr, <span class="at">conf.level =</span> .<span class="dv">95</span>)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Log Likelihood Statistic: 50.89&quot;</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;p value: 0&quot;</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Confidence Level Of Set: 95%&quot;</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Individual Confidence Level: 98.3%&quot;</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Confidence Interval For Group 1: (0.759, 1.688)&quot;</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Confidence Interval For Group 2: (1.472, 5.16)&quot;</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Confidence Interval For Group 3: (2.481, 14.701)&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>  <span class="fu">rinvgauss</span>(<span class="at">n =</span> <span class="dv">35</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">dispersion =</span> <span class="dv">1</span>),</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>  <span class="fu">rinvgauss</span>(<span class="at">n =</span> <span class="dv">40</span>, <span class="at">mean =</span> <span class="dv">2</span>, <span class="at">dispersion =</span> <span class="dv">3</span>),</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>  <span class="fu">rinvgauss</span>(<span class="at">n =</span> <span class="dv">45</span>, <span class="at">mean =</span> <span class="dv">3</span>, <span class="at">dispersion =</span> <span class="dv">5</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>)</span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>fctr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">35</span>), <span class="fu">rep</span>(<span class="dv">2</span>, <span class="dv">40</span>), <span class="fu">rep</span>(<span class="dv">3</span>, <span class="dv">45</span>))</span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>fctr <span class="ot">&lt;-</span> <span class="fu">factor</span>(fctr, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>))</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="fu">empirical_mu_one_way</span>(<span class="at">x =</span> x, <span class="at">fctr =</span> fctr, <span class="at">conf.level =</span> .<span class="dv">95</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co">#&gt; Log Likelihood Statistic: 50.89</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="co">#&gt; p value: 0</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="co">#&gt; Confidence Level Of Set: 95%</span></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="co">#&gt; Individual Confidence Level: 98.3%</span></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="co">#&gt; Confidence Interval For Group 1: (0.759, 1.688)</span></span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="co">#&gt; Confidence Interval For Group 2: (1.472, 5.16)</span></span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="co">#&gt; Confidence Interval For Group 3: (2.481, 14.701)</span></span></code></pre></div>
 </div>
 <div id="tests-for-a-quantile" class="section level2">
 <h2>Tests For A Quantile</h2>
 <p>Any quantile can be tested. In this example, the null hypothesis is
 the median (Q equal to .50) is 0 (value argument).</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">empirical_quantile_one_sample</span>(<span class="at">x =</span> x, <span class="at">Q =</span> .<span class="dv">50</span>, <span class="at">value =</span> <span class="dv">0</span>, <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Log Likelihood Statistic: 2.16&quot;</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;p value: 0.142&quot;</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Confidence Level: 95%&quot;</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Confidence Interval: (-0.24, 0.792)&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="fu">empirical_quantile_one_sample</span>(<span class="at">x =</span> x, <span class="at">Q =</span> .<span class="dv">50</span>, <span class="at">value =</span> <span class="dv">0</span>, <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co">#&gt; Log Likelihood Statistic: 2.16</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#&gt; p value: 0.142</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt; Confidence Level: 95%</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">#&gt; Confidence Interval: (-0.24, 0.792)</span></span></code></pre></div>
 <p>Other quantiles can be tested as well.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Q1</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">empirical_quantile_one_sample</span>(<span class="at">x =</span> x, <span class="at">Q =</span> .<span class="dv">25</span>, <span class="at">value =</span> <span class="dv">0</span>, <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Log Likelihood Statistic: 2&quot;</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;p value: 0.157&quot;</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Confidence Level: 95%&quot;</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Confidence Interval: (-1.2, 0.036)&quot;</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Q3</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">empirical_quantile_one_sample</span>(<span class="at">x =</span> x, <span class="at">Q =</span> .<span class="dv">75</span>, <span class="at">value =</span> <span class="dv">0</span>, <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Log Likelihood Statistic: 19.58&quot;</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;p value: 0&quot;</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Confidence Level: 95%&quot;</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Confidence Interval: (0.418, 1.782)&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Q1</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">empirical_quantile_one_sample</span>(<span class="at">x =</span> x, <span class="at">Q =</span> .<span class="dv">25</span>, <span class="at">value =</span> <span class="dv">0</span>, <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">#&gt; Log Likelihood Statistic: 2</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">#&gt; p value: 0.157</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co">#&gt; Confidence Level: 95%</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt; Confidence Interval: (-1.2, 0.036)</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Q3</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fu">empirical_quantile_one_sample</span>(<span class="at">x =</span> x, <span class="at">Q =</span> .<span class="dv">75</span>, <span class="at">value =</span> <span class="dv">0</span>, <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co">#&gt; Log Likelihood Statistic: 19.58</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co">#&gt; p value: 0</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co">#&gt; Confidence Level: 95%</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co">#&gt; Confidence Interval: (0.418, 1.782)</span></span></code></pre></div>
 <p>In one-way analysis, equality of a quantile is tested. Here, a common
 median (Q equal to .50) is tested.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">35</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">40</span>, <span class="at">mean =</span> <span class="dv">2</span>, <span class="at">sd =</span> <span class="fl">1.25</span>),</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">45</span>, <span class="at">mean =</span> <span class="dv">3</span>, <span class="at">sd =</span> <span class="fl">1.5</span>)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>fctr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">35</span>), <span class="fu">rep</span>(<span class="dv">2</span>, <span class="dv">40</span>), <span class="fu">rep</span>(<span class="dv">3</span>, <span class="dv">45</span>))</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>fctr <span class="ot">&lt;-</span> <span class="fu">factor</span>(fctr, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>))</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">empirical_quantile_one_way</span>(<span class="at">x =</span> x, <span class="at">Q =</span> .<span class="dv">50</span>, <span class="at">fctr =</span> fctr)</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Log Likelihood Statistic: 39.74&quot;</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;p value: 0&quot;</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Confidence Level Of Set: 95%&quot;</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Individual Confidence Level: 98.3%&quot;</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Confidence Interval For Group 1: (0.695, 1.594)&quot;</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Confidence Interval For Group 2: (1.507, 2.712)&quot;</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Confidence Interval For Group 3: (2.308, 3.576)&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>  <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">35</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>  <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">40</span>, <span class="at">mean =</span> <span class="dv">2</span>, <span class="at">sd =</span> <span class="fl">1.25</span>),</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>  <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">45</span>, <span class="at">mean =</span> <span class="dv">3</span>, <span class="at">sd =</span> <span class="fl">1.5</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>)</span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>fctr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">35</span>), <span class="fu">rep</span>(<span class="dv">2</span>, <span class="dv">40</span>), <span class="fu">rep</span>(<span class="dv">3</span>, <span class="dv">45</span>))</span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>fctr <span class="ot">&lt;-</span> <span class="fu">factor</span>(fctr, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>))</span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="fu">empirical_quantile_one_way</span>(<span class="at">x =</span> x, <span class="at">Q =</span> .<span class="dv">50</span>, <span class="at">fctr =</span> fctr)</span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co">#&gt; Log Likelihood Statistic: 39.74</span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co">#&gt; p value: 0</span></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="co">#&gt; Confidence Level Of Set: 95%</span></span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co">#&gt; Individual Confidence Level: 98.3%</span></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="co">#&gt; Confidence Interval For Group 1: (0.695, 1.594)</span></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="co">#&gt; Confidence Interval For Group 2: (1.507, 2.712)</span></span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="co">#&gt; Confidence Interval For Group 3: (2.308, 3.576)</span></span></code></pre></div>
 <p>Note sample size does not have to be equal.</p>
 </div>
 

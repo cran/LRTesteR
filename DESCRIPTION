@@ -1,6 +1,6 @@
 Package: LRTesteR
 Title: Likelihood Ratio Tests and Confidence Intervals
-Version: 1.1.0
+Version: 1.1.1
 Author: Greg McMahan
 Maintainer: Greg McMahan <gmcmacran@gmail.com>
 Description: A collection of hypothesis tests and confidence intervals based on the likelihood ratio
@@ -13,6 +13,6 @@ Suggests: covr, EnvStats, testthat, lmtest, knitr, rmarkdown, emplik,
         emplik2, datasets
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2023-05-29 02:16:50 UTC; gmcma
+Packaged: 2023-10-02 01:59:52 UTC; gmcma
 Repository: CRAN
-Date/Publication: 2023-05-29 15:20:02 UTC
+Date/Publication: 2023-10-02 03:40:02 UTC

@@ -347,24 +347,24 @@ variables following a normal distribution with a common standard
 deviation are created. For this test, the null hypothesis is</p>
 <p><span class="math display">\[ H_{0}: \mu_0 = \mu_1 =
 \mu_2  \]</span></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(LRTesteR)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">3</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>fctr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">50</span>), <span class="fu">rep</span>(<span class="dv">2</span>, <span class="dv">50</span>), <span class="fu">rep</span>(<span class="dv">3</span>, <span class="dv">50</span>))</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>fctr <span class="ot">&lt;-</span> <span class="fu">factor</span>(fctr, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>))</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">gaussian_mu_one_way</span>(<span class="at">x =</span> x, <span class="at">fctr =</span> fctr, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Log Likelihood Statistic: 205.77&quot;</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;p value: 0&quot;</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Confidence Level Of Set: 95%&quot;</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Individual Confidence Level: 98.3%&quot;</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Confidence Interval For Group 1: (0.814, 1.387)&quot;</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Confidence Interval For Group 2: (2.783, 3.452)&quot;</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Confidence Interval For Group 3: (4.537, 5.158)&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(LRTesteR)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">3</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>)</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>fctr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">50</span>), <span class="fu">rep</span>(<span class="dv">2</span>, <span class="dv">50</span>), <span class="fu">rep</span>(<span class="dv">3</span>, <span class="dv">50</span>))</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>fctr <span class="ot">&lt;-</span> <span class="fu">factor</span>(fctr, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>))</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="fu">gaussian_mu_one_way</span>(<span class="at">x =</span> x, <span class="at">fctr =</span> fctr, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="co">#&gt; Log Likelihood Statistic: 205.77</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="co">#&gt; p value: 0</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="co">#&gt; Confidence Level Of Set: 95%</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="co">#&gt; Individual Confidence Level: 98.3%</span></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="co">#&gt; Confidence Interval For Group 1: (0.814, 1.387)</span></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a><span class="co">#&gt; Confidence Interval For Group 2: (2.783, 3.452)</span></span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a><span class="co">#&gt; Confidence Interval For Group 3: (4.537, 5.158)</span></span></code></pre></div>
 </div>
 <div id="cauchy-random-variables" class="section level1">
 <h1>Cauchy Random Variables</h1>
@@ -373,17 +373,17 @@ common location and different scales are created. For this test, the
 null hypothesis is</p>
 <p><span class="math display">\[ H_{0}: \gamma_0 =
 \gamma_1  \]</span></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rcauchy</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">location =</span> <span class="dv">2</span>, <span class="at">scale =</span> <span class="dv">1</span>), <span class="fu">rcauchy</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">location =</span> <span class="dv">2</span>, <span class="at">scale =</span> <span class="dv">3</span>))</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>fctr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">50</span>), <span class="fu">rep</span>(<span class="dv">2</span>, <span class="dv">50</span>))</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>fctr <span class="ot">&lt;-</span> <span class="fu">factor</span>(fctr, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>))</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cauchy_scale_one_way</span>(<span class="at">x =</span> x, <span class="at">fctr =</span> fctr, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Log Likelihood Statistic: 18.2&quot;</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;p value: 0&quot;</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Confidence Level Of Set: 95%&quot;</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Individual Confidence Level: 97.5%&quot;</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Confidence Interval For Group 1: (0.715, 1.71)&quot;</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Confidence Interval For Group 2: (2.388, 5.612)&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rcauchy</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">location =</span> <span class="dv">2</span>, <span class="at">scale =</span> <span class="dv">1</span>), <span class="fu">rcauchy</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">location =</span> <span class="dv">2</span>, <span class="at">scale =</span> <span class="dv">3</span>))</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>fctr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">50</span>), <span class="fu">rep</span>(<span class="dv">2</span>, <span class="dv">50</span>))</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>fctr <span class="ot">&lt;-</span> <span class="fu">factor</span>(fctr, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>))</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="fu">cauchy_scale_one_way</span>(<span class="at">x =</span> x, <span class="at">fctr =</span> fctr, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt; Log Likelihood Statistic: 18.2</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#&gt; p value: 0</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co">#&gt; Confidence Level Of Set: 95%</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co">#&gt; Individual Confidence Level: 97.5%</span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co">#&gt; Confidence Interval For Group 1: (0.715, 1.71)</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="co">#&gt; Confidence Interval For Group 2: (2.388, 5.612)</span></span></code></pre></div>
 </div>
 <div id="poisson-random-variables" class="section level1">
 <h1>Poisson Random Variables</h1>
@@ -391,18 +391,18 @@ null hypothesis is</p>
 created. The null hypothesis is</p>
 <p><span class="math display">\[ H_{0}: \lambda_0 = \lambda_1 =
 \lambda_2  \]</span></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rpois</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">lambda =</span> <span class="dv">1</span>), <span class="fu">rpois</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">lambda =</span> <span class="dv">2</span>), <span class="fu">rpois</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">lambda =</span> <span class="dv">3</span>))</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>fctr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">50</span>), <span class="fu">rep</span>(<span class="dv">2</span>, <span class="dv">50</span>), <span class="fu">rep</span>(<span class="dv">3</span>, <span class="dv">50</span>))</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>fctr <span class="ot">&lt;-</span> <span class="fu">factor</span>(fctr, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>))</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">poisson_lambda_one_way</span>(<span class="at">x =</span> x, <span class="at">fctr =</span> fctr, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Log Likelihood Statistic: 51.11&quot;</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;p value: 0&quot;</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Confidence Level Of Set: 95%&quot;</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Individual Confidence Level: 98.3%&quot;</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Confidence Interval For Group 1: (0.765, 1.471)&quot;</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Confidence Interval For Group 2: (1.541, 2.495)&quot;</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Confidence Interval For Group 3: (2.541, 3.735)&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rpois</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">lambda =</span> <span class="dv">1</span>), <span class="fu">rpois</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">lambda =</span> <span class="dv">2</span>), <span class="fu">rpois</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">lambda =</span> <span class="dv">3</span>))</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>fctr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">50</span>), <span class="fu">rep</span>(<span class="dv">2</span>, <span class="dv">50</span>), <span class="fu">rep</span>(<span class="dv">3</span>, <span class="dv">50</span>))</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>fctr <span class="ot">&lt;-</span> <span class="fu">factor</span>(fctr, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>))</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="fu">poisson_lambda_one_way</span>(<span class="at">x =</span> x, <span class="at">fctr =</span> fctr, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt; Log Likelihood Statistic: 51.11</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">#&gt; p value: 0</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co">#&gt; Confidence Level Of Set: 95%</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co">#&gt; Individual Confidence Level: 98.3%</span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="co">#&gt; Confidence Interval For Group 1: (0.765, 1.471)</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="co">#&gt; Confidence Interval For Group 2: (1.541, 2.495)</span></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="co">#&gt; Confidence Interval For Group 3: (2.541, 3.735)</span></span></code></pre></div>
 </div>
 <div id="mathematical-details" class="section level1">
 <h1>Mathematical Details</h1>
