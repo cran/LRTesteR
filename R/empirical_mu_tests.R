@@ -1,3 +1,11 @@
+#' @keywords internal
+#' Helper to confirm optimization worked as expected for empirical tests.
+check_empirical_optimization <- function(ps) {
+  if (min(ps) < 0 || max(ps) > 1 || !isTRUE(all.equal(target = 1, current = sum(ps), tolerance = .1^6))) {
+    stop("Optimization failed.")
+  }
+}
+
 #' Test the mean parameter of an unknown distribution.
 #'
 #' @inheritParams gaussian_mu_one_sample
@@ -153,6 +161,9 @@ empirical_mu_one_sample <- function(x, mu, alternative = "two.sided", conf.level
     obs_p <- calc_obs_p(x)
     null_p <- calc_null_p(x, mu)
 
+    check_empirical_optimization(obs_p)
+    check_empirical_optimization(null_p)
+
     W <- 2 * (sum(log(obs_p)) - sum(log(null_p)))
     W <- pmax(W, 0) # underflow
     if (alternative != "two.sided") {
@@ -274,6 +285,13 @@ empirical_mu_one_way <- function(x, fctr, conf.level = 0.95) {
   if (conf.level <= 0 || conf.level >= 1) {
     stop("conf.level should between zero and one.")
   }
+  # Confirm optimization problem is solvable
+  if (any(as.vector(by(x, fctr, min)) >= mean(x))) {
+    stop("Every group in x must have at least one data point less than the grand mean.")
+  }
+  if (any(as.vector(by(x, fctr, max)) <= mean(x))) {
+    stop("Every group in x must have at least one data point greater than the grand mean.")
+  }
 
   calc_test_stat <- function(x, mu) {
     calc_null_p <- function(x, fctr) {
@@ -296,8 +314,19 @@ empirical_mu_one_way <- function(x, fctr, conf.level = 0.95) {
           level <- levels(fctr)[i]
           tempX <- x[fctr == level]
           ni <- length(tempX)
-          LB <- (1 - n) / (ni * (max(tempX) - mean(x)))
-          UB <- (1 - n) / (ni * (min(tempX) - mean(x)))
+
+          LB <- pmax(
+            (1 - n) / (ni * (max(tempX) - mean(x))),
+            -n / (ni * (max(tempX) - mean(x)))
+          )
+          LB <- LB + 10 * .Machine$double.eps # greater than, not greater than or equal to.
+
+          UB <- pmin(
+            (1 - n) / (ni * (min(tempX) - mean(x))),
+            -n / (ni * (min(tempX) - mean(x)))
+          )
+          UB <- UB - 10 * .Machine$double.eps # less than, not less than or equal to.
+
           lambdas[i] <- stats::uniroot(g, lower = LB, upper = UB, tol = .Machine$double.eps^.50, extendInt = "yes", level = level)$root
         }
 
@@ -340,6 +369,9 @@ empirical_mu_one_way <- function(x, fctr, conf.level = 0.95) {
 
     null_p <- calc_null_p(x, fctr)
     obs_p <- calc_obs_p(x, fctr)
+
+    check_empirical_optimization(null_p)
+    check_empirical_optimization(obs_p)
 
     W <- 2 * (sum(log(obs_p)) - sum(log(null_p)))
     W <- pmax(W, 0)

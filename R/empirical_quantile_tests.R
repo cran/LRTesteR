@@ -171,6 +171,9 @@ empirical_quantile_one_sample <- function(x, Q, value, alternative = "two.sided"
     obs_p <- calc_obs_p(x)
     null_p <- calc_null_p(x, Q)
 
+    check_empirical_optimization(obs_p)
+    check_empirical_optimization(null_p)
+
     W <- 2 * (sum(log(obs_p)) - sum(log(null_p)))
     W <- pmax(W, 0) # underflow
     if (alternative != "two.sided") {
@@ -317,6 +320,13 @@ empirical_quantile_one_way <- function(x, Q, fctr, conf.level = 0.95) {
   if (conf.level <= 0 || conf.level >= 1) {
     stop("conf.level should between zero and one.")
   }
+  # Confirm optimization problem is solvable
+  if (any(as.vector(by(x, fctr, min)) >= as.numeric(stats::quantile(x, Q)))) {
+    stop("Every group in x must have at least one data point less than the tested quantile.")
+  }
+  if (any(as.vector(by(x, fctr, max)) <= as.numeric(stats::quantile(x, Q)))) {
+    stop("Every group in x must have at least one data point greater than the tested quantile.")
+  }
 
   calc_test_stat <- function(x, Q, fctr) {
     value <- as.numeric(stats::quantile(x, Q))
@@ -342,8 +352,19 @@ empirical_quantile_one_way <- function(x, Q, fctr, conf.level = 0.95) {
           level <- levels(fctr)[i]
           tempX <- x[fctr == level]
           ni <- length(tempX)
-          LB <- (1 - n) / (ni * (max(tempX) - mean(x)))
-          UB <- (1 - n) / (ni * (min(tempX) - mean(x)))
+
+          LB <- pmax(
+            (1 - n) / (ni * (max(tempX) - mean(x))),
+            -n / (ni * (max(tempX) - mean(x)))
+          )
+          LB <- LB + 10 * .Machine$double.eps # greater than, not greater than or equal to.
+
+          UB <- pmin(
+            (1 - n) / (ni * (min(tempX) - mean(x))),
+            -n / (ni * (min(tempX) - mean(x)))
+          )
+          UB <- UB - 10 * .Machine$double.eps # less than, not less than or equal to.
+
           lambdas[i] <- stats::uniroot(g, lower = LB, upper = UB, tol = .Machine$double.eps^.50, extendInt = "yes", level = level)$root
         }
 
@@ -387,6 +408,9 @@ empirical_quantile_one_way <- function(x, Q, fctr, conf.level = 0.95) {
     null_p <- calc_null_p(x, fctr)
     obs_p <- calc_obs_p(x, fctr)
 
+    check_empirical_optimization(null_p)
+    check_empirical_optimization(obs_p)
+
     W <- 2 * (sum(log(obs_p)) - sum(log(null_p)))
     W <- pmax(W, 0)
 
@@ -411,7 +435,7 @@ empirical_quantile_one_way <- function(x, Q, fctr, conf.level = 0.95) {
     l <- levels(fctr)[i]
     index <- which(fctr == l)
     tempX <- x[index]
-    tempCI <- empirical_quantile_one_sample(tempX, Q, as.numeric(stats::quantile(x, Q)), "two.sided", individual.conf.level)
+    tempCI <- empirical_quantile_one_sample(tempX, Q, as.numeric(stats::quantile(tempX, Q)), "two.sided", individual.conf.level)
     tempCI <- tempCI$conf.int
     CI[[l]] <- tempCI
   }

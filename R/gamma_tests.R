@@ -1,29 +1,7 @@
 #' @keywords internal
 calc_test_stat_gamma_shape <- function(x, shape, alternative) {
-  get_MLEs <- function(x) {
-    # Based on wiki page for gamma distribution.
-    # starting points
-    s <- log(mean(x)) - mean(log(x))
-    shape <- (3 - s + ((s - 3)^2 + 24 * s)^.5) / (12 * s)
-
-    # newton updates
-    tol <- 999
-    counter <- 0
-    while (tol > .00001 && counter <= 30) {
-      shape_new <- shape - (log(shape) - base::digamma(shape) - s) / ((1 / shape) - base::psigamma(shape, deriv = 1))
-      tol <- max(abs(shape - shape_new))
-      counter <- counter + 1
-      shape <- shape_new
-    }
-
-    scale <- sum(x) / (shape * length(x))
-    rate <- 1 / scale
-    MLEs <- c(shape, rate)
-
-    return(MLEs)
-  }
-
-  MLEs <- get_MLEs(x)
+  MLEs <- unname(EnvStats::egamma(x, method = "mle")$parameters)
+  MLEs[2] <- 1 / MLEs[2] # convert to rate
   obs_shape <- MLEs[1]
   obs_rate <- MLEs[2]
 
@@ -61,34 +39,13 @@ calc_test_stat_gamma_shape <- function(x, shape, alternative) {
 #' x <- rgamma(100, shape = 3, scale = 2)
 #' gamma_shape_one_sample(x, 1, "greater")
 #' @export
-gamma_shape_one_sample <- LRTesteR:::create_test_function_one_sample_case_one(LRTesteR:::calc_test_stat_gamma_shape, shape, 0)
+gamma_shape_one_sample <- LRTesteR:::create_test_function_one_sample_case_one(LRTesteR:::calc_test_stat_gamma_shape, shape, 45, 0)
 
 #' @keywords internal
 calc_test_stat_gamma_scale <- function(x, scale, alternative) {
-  get_MLEs <- function(x) {
-    # Based on wiki page for gamma distribution.
-    # starting points
-    s <- log(mean(x)) - mean(log(x))
-    shape <- (3 - s + ((s - 3)^2 + 24 * s)^.5) / (12 * s)
+  MLEs <- unname(EnvStats::egamma(x, method = "mle")$parameters)
+  MLEs[2] <- 1 / MLEs[2] # convert to rate
 
-    # newton updates
-    tol <- 999
-    counter <- 0
-    while (tol > .00001 && counter <= 30) {
-      shape_new <- shape - (log(shape) - base::digamma(shape) - s) / ((1 / shape) - base::psigamma(shape, deriv = 1))
-      tol <- max(abs(shape - shape_new))
-      counter <- counter + 1
-      shape <- shape_new
-    }
-
-    scale <- sum(x) / (shape * length(x))
-    rate <- 1 / scale
-    MLEs <- c(shape, rate)
-
-    return(MLEs)
-  }
-
-  MLEs <- get_MLEs(x)
   obs_shape <- MLEs[1]
   obs_rate <- MLEs[2]
   obs_scale <- 1 / obs_rate
@@ -140,34 +97,12 @@ calc_test_stat_gamma_scale <- function(x, scale, alternative) {
 #' x <- rgamma(100, shape = 1, scale = 2)
 #' gamma_scale_one_sample(x, 1, "greater")
 #' @export
-gamma_scale_one_sample <- LRTesteR:::create_test_function_one_sample_case_one(LRTesteR:::calc_test_stat_gamma_scale, scale, 0)
+gamma_scale_one_sample <- LRTesteR:::create_test_function_one_sample_case_one(LRTesteR:::calc_test_stat_gamma_scale, scale, 45, 0)
 
 #' @keywords internal
 calc_test_stat_gamma_rate <- function(x, rate, alternative) {
-  get_MLEs <- function(x) {
-    # Based on wiki page for gamma distribution.
-    # starting points
-    s <- log(mean(x)) - mean(log(x))
-    shape <- (3 - s + ((s - 3)^2 + 24 * s)^.5) / (12 * s)
-
-    # newton updates
-    tol <- 999
-    counter <- 0
-    while (tol > .00001 && counter <= 30) {
-      shape_new <- shape - (log(shape) - base::digamma(shape) - s) / ((1 / shape) - base::psigamma(shape, deriv = 1))
-      tol <- max(abs(shape - shape_new))
-      counter <- counter + 1
-      shape <- shape_new
-    }
-
-    scale <- sum(x) / (shape * length(x))
-    rate <- 1 / scale
-    MLEs <- c(shape, rate)
-
-    return(MLEs)
-  }
-
-  MLEs <- get_MLEs(x)
+  MLEs <- unname(EnvStats::egamma(x, method = "mle")$parameters)
+  MLEs[2] <- 1 / MLEs[2] # convert to rate
   obs_shape <- MLEs[1]
   obs_rate <- MLEs[2]
 
@@ -219,35 +154,13 @@ calc_test_stat_gamma_rate <- function(x, rate, alternative) {
 #' x <- rgamma(100, shape = 1, rate = 2)
 #' gamma_rate_one_sample(x, 1, "greater")
 #' @export
-gamma_rate_one_sample <- LRTesteR:::create_test_function_one_sample_case_one(LRTesteR:::calc_test_stat_gamma_rate, rate, 0)
+gamma_rate_one_sample <- LRTesteR:::create_test_function_one_sample_case_one(LRTesteR:::calc_test_stat_gamma_rate, rate, 45, 0)
 
 #' @keywords internal
 calc_test_stat_gamma_shape_one_way <- function(x, fctr) {
   # null
-  get_MLEs <- function(x) {
-    # Based on wiki page for gamma distribution.
-    # starting points
-    s <- log(mean(x)) - mean(log(x))
-    shape <- (3 - s + ((s - 3)^2 + 24 * s)^.5) / (12 * s)
-
-    # newton updates
-    tol <- 999
-    counter <- 0
-    while (tol > .00001 && counter <= 30) {
-      shape_new <- shape - (log(shape) - base::digamma(shape) - s) / ((1 / shape) - base::psigamma(shape, deriv = 1))
-      tol <- max(abs(shape - shape_new))
-      counter <- counter + 1
-      shape <- shape_new
-    }
-
-    scale <- sum(x) / (shape * length(x))
-    rate <- 1 / scale
-    MLEs <- c(shape, rate)
-
-    return(MLEs)
-  }
-
-  MLEs <- get_MLEs(x)
+  MLEs <- unname(EnvStats::egamma(x, method = "mle")$parameters)
+  MLEs[2] <- 1 / MLEs[2] # convert to rate
   obs_shape <- MLEs[1]
   obs_rate <- MLEs[2]
 
@@ -343,35 +256,13 @@ calc_test_stat_gamma_shape_one_way <- function(x, fctr) {
 #' fctr <- factor(fctr, levels = c("1", "2", "3"))
 #' gamma_shape_one_way(x, fctr, .95)
 #' @export
-gamma_shape_one_way <- create_test_function_one_way_case_one(LRTesteR:::calc_test_stat_gamma_shape_one_way, gamma_shape_one_sample)
+gamma_shape_one_way <- create_test_function_one_way_case_one(LRTesteR:::calc_test_stat_gamma_shape_one_way, gamma_shape_one_sample, 90)
 
 #' @keywords internal
 calc_test_stat_gamma_scale_one_way <- function(x, fctr) {
   # null
-  get_MLEs <- function(x) {
-    # Based on wiki page for gamma distribution.
-    # starting points
-    s <- log(mean(x)) - mean(log(x))
-    shape <- (3 - s + ((s - 3)^2 + 24 * s)^.5) / (12 * s)
-
-    # newton updates
-    tol <- 999
-    counter <- 0
-    while (tol > .00001 && counter <= 30) {
-      shape_new <- shape - (log(shape) - base::digamma(shape) - s) / ((1 / shape) - base::psigamma(shape, deriv = 1))
-      tol <- max(abs(shape - shape_new))
-      counter <- counter + 1
-      shape <- shape_new
-    }
-
-    scale <- sum(x) / (shape * length(x))
-    rate <- 1 / scale
-    MLEs <- c(shape, rate)
-
-    return(MLEs)
-  }
-
-  MLEs <- get_MLEs(x)
+  MLEs <- unname(EnvStats::egamma(x, method = "mle")$parameters)
+  MLEs[2] <- 1 / MLEs[2] # convert to rate
   obs_shape <- MLEs[1]
   obs_rate <- MLEs[2]
   obs_scale <- 1 / obs_rate
@@ -447,35 +338,13 @@ calc_test_stat_gamma_scale_one_way <- function(x, fctr) {
 #' fctr <- factor(fctr, levels = c("1", "2", "3"))
 #' gamma_scale_one_way(x, fctr, .95)
 #' @export
-gamma_scale_one_way <- create_test_function_one_way_case_one(LRTesteR:::calc_test_stat_gamma_scale_one_way, gamma_scale_one_sample)
+gamma_scale_one_way <- create_test_function_one_way_case_one(LRTesteR:::calc_test_stat_gamma_scale_one_way, gamma_scale_one_sample, 90)
 
 #' @keywords internal
 calc_test_stat_gamma_rate_one_way <- function(x, fctr) {
   # null
-  get_MLEs <- function(x) {
-    # Based on wiki page for gamma distribution.
-    # starting points
-    s <- log(mean(x)) - mean(log(x))
-    shape <- (3 - s + ((s - 3)^2 + 24 * s)^.5) / (12 * s)
-
-    # newton updates
-    tol <- 999
-    counter <- 0
-    while (tol > .00001 && counter <= 30) {
-      shape_new <- shape - (log(shape) - base::digamma(shape) - s) / ((1 / shape) - base::psigamma(shape, deriv = 1))
-      tol <- max(abs(shape - shape_new))
-      counter <- counter + 1
-      shape <- shape_new
-    }
-
-    scale <- sum(x) / (shape * length(x))
-    rate <- 1 / scale
-    MLEs <- c(shape, rate)
-
-    return(MLEs)
-  }
-
-  MLEs <- get_MLEs(x)
+  MLEs <- unname(EnvStats::egamma(x, method = "mle")$parameters)
+  MLEs[2] <- 1 / MLEs[2] # convert to rate
   obs_shape <- MLEs[1]
   obs_rate <- MLEs[2]
 
@@ -550,4 +419,4 @@ calc_test_stat_gamma_rate_one_way <- function(x, fctr) {
 #' fctr <- factor(fctr, levels = c("1", "2", "3"))
 #' gamma_rate_one_way(x, fctr, .95)
 #' @export
-gamma_rate_one_way <- create_test_function_one_way_case_one(LRTesteR:::calc_test_stat_gamma_rate_one_way, gamma_rate_one_sample)
+gamma_rate_one_way <- create_test_function_one_way_case_one(LRTesteR:::calc_test_stat_gamma_rate_one_way, gamma_rate_one_sample, 90)
