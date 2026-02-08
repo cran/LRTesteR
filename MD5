@@ -1,6 +1,6 @@
-09536e77eb80a208baf42ab4190eecdc *DESCRIPTION
+7900898d73d1e10f0ccb86b39b8b6788 *DESCRIPTION
 2d665c54179887a739eed091a4853d17 *NAMESPACE
-2271ac4e060686d1f40f1acb8a60bc08 *NEWS.md
+5176f0d0b9dd69b49bdf8879c22e25af *NEWS.md
 e9f14a2f93123f57ec77fd3673f91b7d *R/a_function_factories_case_one.R
 32e553c6169fce08a3c1d8100c1df5fa *R/a_function_factories_case_two.R
 0c73118f63c860a7080be5cfb83cd879 *R/beta_tests.R
@@ -16,14 +16,14 @@ af27f4408b6d0affb033d5a549169cca *R/log_normal.R
 1465269c2547463bf8bba2718f9b962a *R/negative_binomial_tests.R
 17ca2341e07a350cd252a0e358d5fd21 *R/poisson_tests.R
 c87c546f9f8c2ad5602bfa15f358a473 *R/print.R
-4a332d3b853197d515662c12b8c18088 *README.md
-e8e17fbe9f1f367bef9463e4865641d6 *build/vignette.rds
+2523f38a2ed17081cb2e3e9863fdc219 *README.md
+54c4e97717745ae452aee88f027e7e4b *build/vignette.rds
 d29e5129e0386c1f7fd6c82d1f52856e *inst/doc/Analysis_of_Deviance.R
 251128ad9e1e70f8c3a7455a0b567d19 *inst/doc/Analysis_of_Deviance.Rmd
-7c53eb2cf773eb634e8257e18fa68f48 *inst/doc/Analysis_of_Deviance.html
+65c502f06f8a07b3e13944ac82f46592 *inst/doc/Analysis_of_Deviance.html
 de121dd96509b4f73db8a156dc4aab23 *inst/doc/Nonparametric_Tests.R
 af1a8ce89072897c5d4f760a76c634f8 *inst/doc/Nonparametric_Tests.Rmd
-08105ac20a9d9162f1b4faf9abf3e1f7 *inst/doc/Nonparametric_Tests.html
+c2d68608353921d447a273e860807bb9 *inst/doc/Nonparametric_Tests.html
 8fe168017cc46307c7b1ee01a2b11214 *man/beta_shape1_one_sample.Rd
 fab0ef26adb2532c35f94e15976c6367 *man/beta_shape1_one_way.Rd
 9c54302771b4ce0651d1dff239e294ef *man/beta_shape2_one_sample.Rd
@@ -79,7 +79,7 @@ c41460276a7e745bdb6b0900ac586d92 *tests/testthat/test_gamma_tests.R
 7abf0fbb69267660c874cf3513ea3931 *tests/testthat/test_inverse_gaussian.R
 0c2d2e055cbb313b212f70c4b02d540b *tests/testthat/test_log_normal_tests.R
 c662c0469867fbb82c5bcac479a811cd *tests/testthat/test_negative_binomial_tests.R
-0f4272343e0fd4e462bf5809526e52bd *tests/testthat/test_poisson_tests.R
+36f861f830f4ceacc17f6a22a97297eb *tests/testthat/test_poisson_tests.R
 285b2d3773c9a77d5bb8d596507f2c01 *tests/testthat/test_print.R
 251128ad9e1e70f8c3a7455a0b567d19 *vignettes/Analysis_of_Deviance.Rmd
 af1a8ce89072897c5d4f760a76c634f8 *vignettes/Nonparametric_Tests.Rmd
